@@ -4,16 +4,16 @@
  */
 export const theme = {
   colors: {
-    background: '#1b1035',
-    surface: '#2a1a52',
-    text: '#fff8e7',
-    muted: '#b9a9d9',
-    accent: '#ffcc33',
-    danger: '#ff5a5f',
-    stripeA: '#e63946',
-    stripeB: '#fff8e7',
-    water: '#5ec8f2',
-    wood: '#8a5a3b',
+    background: '#0b0f2a',
+    surface: '#1a2048',
+    text: '#f2f5ff',
+    muted: '#a3acd6',
+    accent: '#ffd166',
+    danger: '#ff5a7a',
+    stripeA: '#6a3de8',
+    stripeB: '#dfe6ff',
+    water: '#5ee7f2',
+    wood: '#4a5578',
   },
   font: {
     family: '"Trebuchet MS", "Segoe UI", system-ui, sans-serif',

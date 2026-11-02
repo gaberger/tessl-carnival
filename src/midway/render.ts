@@ -370,9 +370,9 @@ interface Stripes {
   bShade: string;
 }
 
-const RED: Stripes = {
-  a: palette.red,
-  aShade: palette.redShade,
+const VIOLET: Stripes = {
+  a: palette.violet,
+  aShade: palette.violetShade,
   b: palette.cream,
   bShade: palette.creamShade,
 };
@@ -388,7 +388,7 @@ const BLUE: Stripes = {
   b: palette.cream,
   bShade: palette.creamShade,
 };
-const TENT_COLORS = [GOLD, BLUE, BLUE, RED] as const;
+const TENT_COLORS = [GOLD, BLUE, BLUE, VIOLET] as const;
 
 function rimPoint(c: Pt, r: number, angle: number, z: number): Pt {
   return [c[0] + Math.cos(angle) * r * ISO_RX, c[1] + Math.sin(angle) * r * ISO_RY - z];
@@ -529,7 +529,7 @@ function roundTent(
 function bigTop(ctx: Ctx, prop: Prop, t: number) {
   const cx = prop.x + prop.w / 2;
   const cy = prop.y + prop.h / 2;
-  roundTent(ctx, cx, cy, 1.9, 38, 46, RED, t, palette.red);
+  roundTent(ctx, cx, cy, 1.9, 38, 46, VIOLET, t, palette.violet);
   const c = at(cx, cy);
   // A second ring of bunting, and gold lights round the wall.
   ringFlags(ctx, c, 1.5, 38 + 22, t, 12);
@@ -547,7 +547,7 @@ function carousel(ctx: Ctx, prop: Prop, t: number) {
   const turn = t * 0.5;
   const r = 1.75;
   oval(ctx, c[0] + 8, c[1] + 4, r * ISO_RX * 1.1, r * ISO_RY * 1.1, palette.shadow);
-  cylinder(ctx, c, r, 0, 6, RED, 24);
+  cylinder(ctx, c, r, 0, 6, VIOLET, 24);
   oval(ctx, c[0], c[1] - 6, r * ISO_RX, r * ISO_RY, palette.pink);
   oval(ctx, c[0], c[1] - 6, r * ISO_RX * 0.82, r * ISO_RY * 0.82, palette.pinkShade);
 
@@ -608,7 +608,7 @@ function carousel(ctx: Ctx, prop: Prop, t: number) {
         [x + 1, hy - 1],
         [x - 1, hy - 1],
       ],
-      palette.red,
+      palette.violet,
     );
   };
   horses.filter((h) => Math.sin(h.angle) < 0).forEach(drawHorse);
@@ -631,12 +631,12 @@ function carousel(ctx: Ctx, prop: Prop, t: number) {
       [column[0] + 2, c[1] - roofZ],
       [column[0] - 2, c[1] - roofZ],
     ],
-    palette.red,
+    palette.violet,
   );
   horses.filter((h) => Math.sin(h.angle) >= 0).forEach(drawHorse);
 
-  dome(ctx, c, r * 1.15, roofZ, 26, RED, turn);
-  scallopRing(ctx, c, r * 1.15, roofZ, 14, 4, [palette.red, palette.cream]);
+  dome(ctx, c, r * 1.15, roofZ, 26, VIOLET, turn);
+  scallopRing(ctx, c, r * 1.15, roofZ, 14, 4, [palette.violet, palette.cream]);
   ringFlags(ctx, c, r * 1.05, roofZ - 6, t, 16);
   knob(ctx, c[0], c[1] - roofZ - 26);
   flag(ctx, c[0], c[1] - roofZ - 28, t, palette.gold);
@@ -646,7 +646,7 @@ function carousel(ctx: Ctx, prop: Prop, t: number) {
 
 /** A tent with a ridged roof running along the x axis. */
 function peakedTent(ctx: Ctx, prop: Prop, t: number) {
-  const colors = prop.variant % 2 === 0 ? BLUE : RED;
+  const colors = prop.variant % 2 === 0 ? BLUE : VIOLET;
   const x0 = prop.x + 0.2;
   const x1 = prop.x + prop.w - 0.2;
   const y0 = prop.y + 0.25;
@@ -730,7 +730,7 @@ function peakedTent(ctx: Ctx, prop: Prop, t: number) {
   const ridgeFront = at(x1 + 0.1, ym, wall + roof);
   const ridgeBack = at(x0 - 0.1, ym, wall + roof);
   flag(ctx, ridgeBack[0], ridgeBack[1], t, palette.gold);
-  flag(ctx, ridgeFront[0], ridgeFront[1], t + 1, palette.red);
+  flag(ctx, ridgeFront[0], ridgeFront[1], t + 1, palette.violet);
 }
 
 function wheel(ctx: Ctx, x: number, y: number, r: number) {
@@ -742,7 +742,7 @@ function wheel(ctx: Ctx, x: number, y: number, r: number) {
 function wagon(ctx: Ctx, prop: Prop) {
   const body =
     prop.variant % 2 === 0
-      ? { top: palette.red, left: palette.red, right: palette.redShade }
+      ? { top: palette.violet, left: palette.violet, right: palette.violetShade }
       : { top: palette.blue, left: palette.blue, right: palette.blueShade };
   const x = prop.x + 0.1;
   const y = prop.y + 0.1;
@@ -893,12 +893,12 @@ function cart(ctx: Ctx, prop: Prop, t: number) {
   const look = visitorLook(prop.x + prop.y);
   // The vendor stands behind the cart.
   const vendor = at(prop.x + 0.5, prop.y + 0.12);
-  person(ctx, vendor[0], vendor[1], { ...look, shirt: palette.cream, cap: palette.red });
+  person(ctx, vendor[0], vendor[1], { ...look, shirt: palette.cream, cap: palette.violet });
   poly(ctx, rectPoints({ x: x + 0.15, y: y + 0.15, w, h: d }), palette.shadow);
 
   const body =
     kind === 0
-      ? { top: palette.cream, left: palette.red, right: palette.redShade }
+      ? { top: palette.cream, left: palette.violet, right: palette.violetShade }
       : kind === 1
         ? { top: palette.cream, left: palette.pink, right: palette.pinkShade }
         : { top: palette.cream, left: palette.blue, right: palette.blueShade };
@@ -930,7 +930,7 @@ function cart(ctx: Ctx, prop: Prop, t: number) {
         2,
         palette.cream,
       );
-    box(ctx, x, y, w, d, 29, 2, palette.red, palette.red, palette.redShade);
+    box(ctx, x, y, w, d, 29, 2, palette.violet, palette.violet, palette.violetShade);
   } else if (kind === 1) {
     for (let i = 0; i < 3; i++) {
       const sx = top[0] - 7 + i * 7;
@@ -970,7 +970,7 @@ function cart(ctx: Ctx, prop: Prop, t: number) {
         [cx + 7, cy - 16],
         [cx - 7, cy - 16],
       ],
-      palette.red,
+      palette.violet,
     );
     poly(
       ctx,
@@ -1009,7 +1009,7 @@ function ticketBooth(ctx: Ctx, prop: Prop) {
   const x = prop.x + 0.15;
   const y = prop.y + 0.15;
   poly(ctx, rectPoints({ x: x + 0.2, y: y + 0.2, w: 0.7, h: 0.7 }), palette.shadow);
-  box(ctx, x, y, 0.7, 0.7, 0, 26, palette.cream, palette.red, palette.redShade);
+  box(ctx, x, y, 0.7, 0.7, 0, 26, palette.cream, palette.violet, palette.violetShade);
   poly(
     ctx,
     [
@@ -1031,7 +1031,11 @@ function ticketBooth(ctx: Ctx, prop: Prop) {
   }
   box(ctx, x - 0.05, y - 0.05, 0.8, 0.8, 26, 3, palette.blue, palette.blueShade, palette.blueShade);
   onPlane(ctx, at(x + 0.35, y + 0.35, 38), () =>
-    signBoard(ctx, 'TICKETS', 28, 9, { board: palette.gold, edge: palette.red, text: palette.red }),
+    signBoard(ctx, 'TICKETS', 28, 9, {
+      board: palette.gold,
+      edge: palette.violet,
+      text: palette.violet,
+    }),
   );
 }
 
@@ -1231,7 +1235,7 @@ function buntingPole(ctx: Ctx, prop: Prop) {
         [x + 1.3, y - z - 5],
         [x - 1.3, y - z - 3],
       ],
-      palette.red,
+      palette.violet,
     );
   knob(ctx, x, y - POLE_HEIGHT - 1);
 }
@@ -1298,7 +1302,7 @@ function ferrisWheel(ctx: Ctx, prop: Prop, t: number) {
           palette.metalShade,
           1,
         );
-        ctx.fillStyle = palette.red;
+        ctx.fillStyle = palette.violet;
         ctx.beginPath();
         ctx.roundRect(gx - 5, gy + 4, 10, 8, 2);
         ctx.fill();
@@ -1351,8 +1355,8 @@ const BOOTH_SCHEMES = [
   {
     wall: palette.cream,
     wallShade: palette.creamShade,
-    awning: [palette.red, palette.cream],
-    awningShade: [palette.redShade, palette.creamShade],
+    awning: [palette.violet, palette.cream],
+    awningShade: [palette.violetShade, palette.creamShade],
   },
   {
     wall: palette.sky2,
@@ -1363,8 +1367,8 @@ const BOOTH_SCHEMES = [
   {
     wall: palette.pink,
     wallShade: palette.pinkShade,
-    awning: [palette.red, palette.gold],
-    awningShade: [palette.redShade, palette.goldShade],
+    awning: [palette.violet, palette.gold],
+    awningShade: [palette.violetShade, palette.goldShade],
   },
 ] as const;
 const CLOSED_SCHEME = {
@@ -1379,7 +1383,7 @@ const BOOTH_WALL = 34;
 export const BOOTH_SIGN_HEIGHT = BOOTH_WALL + 22;
 
 function target(ctx: Ctx, r: number) {
-  const rings = [palette.red, palette.cream, palette.red, palette.cream];
+  const rings = [palette.violet, palette.cream, palette.violet, palette.cream];
   rings.forEach((color, i) => {
     ctx.fillStyle = color;
     ctx.beginPath();
@@ -1528,7 +1532,7 @@ function booth(ctx: Ctx, slot: BoothSlot, name: string, t: number, glow: boolean
       60,
       16,
       open
-        ? { board: palette.cream, edge: palette.red, text: palette.red }
+        ? { board: palette.cream, edge: palette.violet, text: palette.violet }
         : { board: palette.metal, edge: palette.closedShade, text: palette.closedShade },
       glow,
     );
@@ -1610,7 +1614,7 @@ export function visitorLook(n: number): Look {
 export const PLAYER_LOOK: Look = {
   skin: palette.skins[0],
   hair: palette.hairs[2],
-  shirt: palette.red,
+  shirt: palette.violet,
   pants: palette.pants[0],
   cap: palette.gold,
 };
@@ -1663,7 +1667,7 @@ export function drawArch(ctx: Ctx, map: MidwayMap, t: number) {
     ctx.beginPath();
     ctx.ellipse(0, -10, 18, 14, 0, Math.PI, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = palette.red;
+    ctx.fillStyle = palette.violet;
     ctx.beginPath();
     ctx.ellipse(0, -10, 12, 9, 0, Math.PI, Math.PI * 2);
     ctx.fill();
@@ -1681,11 +1685,32 @@ export function drawArch(ctx: Ctx, map: MidwayMap, t: number) {
   });
   for (const px of [left, right]) {
     const top = at(px + 0.13, y - 0.02, ARCH_HEIGHT);
-    flag(ctx, top[0], top[1], t + px, palette.red);
+    flag(ctx, top[0], top[1], t + px, palette.violet);
   }
 }
 
 // ── The sky ───────────────────────────────────────────────────────────────
+
+const STAR_COUNT = 140;
+const STAR_FIELD_HEIGHT = 600;
+
+/**
+ * Stars above the horizon, in zoomed screen pixels. They scroll slower than the
+ * nebula so they feel further away. Pass `t` as 0 to keep them from twinkling.
+ */
+export function drawStars(ctx: Ctx, width: number, horizon: number, cameraX: number, t: number) {
+  const span = width + 8;
+  ctx.fillStyle = palette.star;
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const y = horizon - 4 - hash(i, 2) * STAR_FIELD_HEIGHT;
+    if (y < 0) continue;
+    const x = (((hash(i, 1) * span - cameraX * 0.1) % span) + span) % span;
+    const size = 0.6 + hash(i, 3) * 1.1;
+    ctx.globalAlpha = 0.55 + 0.45 * Math.sin(t * (1 + hash(i, 4) * 2) + i);
+    ctx.fillRect(x, y, size, size);
+  }
+  ctx.globalAlpha = 1;
+}
 
 export interface Cloud {
   x: number;
